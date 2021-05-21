@@ -1,0 +1,18 @@
+- file: intro
+- part: Getting Started
+  chapters:
+  - file: getting_started/earthdata_login
+  - file: getting_started/authentication 
+    expand_section: true
+    sections:
+    - file: getting_started/netrc_file
+    - file: getting_started/inline_authentication
+- part: Background
+  chapters:
+  - file: cloud_optimized_data_formats
+- part: NASA Cloud Data Discovery
+  chapters:
+  - file: discovery/discovery
+- part: NASA Cloud Data Access
+  chapters:
+  - file: access/access
