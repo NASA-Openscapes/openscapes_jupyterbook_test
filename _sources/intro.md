@@ -1,3 +1,5 @@
 # Welcome
 
-Be ready to have you mind blown! ![](img/cat_mindblown.jpg)
+Welcome to the NASA Openscapes Cloud for Earth Science Book!  
+
+This book contains awesome stuff!  
