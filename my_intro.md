@@ -1,3 +1,0 @@
-# Welcome
-
-My Intro
