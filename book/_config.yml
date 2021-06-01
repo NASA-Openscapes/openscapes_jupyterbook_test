@@ -30,3 +30,7 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  
+# Disable building files that aren’t specified in the TOC
+# See https://jupyterbook.org/basics/build.html#disable-building-files-that-arent-specified-in-the-toc
+only_build_toc_files: true
