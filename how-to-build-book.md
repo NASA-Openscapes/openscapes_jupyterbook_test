@@ -38,20 +38,19 @@ git pull
 jupyter-book build ./book
 ```
 
-You'll want to commit your changes to GitHub (I do this from the RStudio GUI):
+### Commit, push, and publishing as gh-pages (github.io)
 
+To publish the book to your `gh-pages` branch and then view on nasa-openscapes.github.io/<our book>, you need to run the following with the `ghp-import` package:
+
+You'll need to also commit your changes to GitHub:
 ```{bash}
+## git commands to pus to main/master branch
 git add --all
 git commit -m "rebuilding book with TOC disabling in _config.yml"
 git pull # just to be safe
 git push
-```
 
-
-### Publishing as github.io
-
-To publish the book to your `gh-pages` branch and then view on nasa-openscapes.github.io/<our book>, you need to run the following with the `ghp-import` package:
-```{bash}
+# publish to gh-pages
 ghp-import -n -p -f ./book/_build/html
 ```
 
