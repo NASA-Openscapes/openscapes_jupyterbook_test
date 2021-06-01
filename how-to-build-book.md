@@ -38,11 +38,13 @@ git pull
 jupyter-book build ./book
 ```
 
-You'll want to commit your changes to GitHub:
+You'll want to commit your changes to GitHub (I do this from the RStudio GUI):
 
 ```{bash}
+git add --all
 git commit -m "rebuilding book with TOC disabling in _config.yml"
-
+git pull # just to be safe
+git push
 ```
 
 
