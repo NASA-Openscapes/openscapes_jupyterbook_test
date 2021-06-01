@@ -2,6 +2,7 @@
 - part: Getting Started
   chapters:
   - file: getting_started/earthdata_login
+  - file: getting_started/earthdata_login_test
   - file: getting_started/authentication
     expand_section: true
     sections:
