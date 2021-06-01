@@ -1,18 +1,26 @@
 ## Julie's workflow from RStudio
 
-Based on <https://jupyterbook.org/intro.html>
+Based on <https://jupyterbook.org/intro.html>. This is all in Bash from the Command Line (I use Terminal from within RStudio), no Python needed. 
 
-First install `jupyter-book` in Bash from the Command Line (I use Terminal from within RStudio)
+First install `jupyter-book`:
 ```{bash}
 pip install -U jupyter-book
 ```
 
-Next, clone the repository and set it as the current directory. I did this from RStudio 
+Next, clone the repository and set it as the current directory (I did this clicking from RStudio)
 ```{bash}
 git clone https://github.com/NASA-Openscapes/openscapes_jupyterbook_test/
 cd openscapes_jupyterbook_test
 ```
 
+Then, build the book!
 ```{bash}
 jupyter-book build ./book
 ```
+
+When Cole added updates, I merged his pull request at GitHub.com and then: 
+```{bash}
+git pull
+jupyter-book build ./book
+```
+
