@@ -46,7 +46,7 @@ You'll need to also commit your changes to GitHub:
 ```{bash}
 ## git commands to pus to main/master branch
 git add --all
-git commit -m "rebuilding book with TOC disabling in _config.yml"
+git commit -m "commit message here"
 git pull # just to be safe
 git push
 
