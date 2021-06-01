@@ -24,3 +24,9 @@ git pull
 jupyter-book build ./book
 ```
 
+Cole said that he would run: 
+```{bash}
+ghp-import -n -p -f ./book/_build/html
+```
+
+
