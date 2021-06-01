@@ -1,0 +1,18 @@
+## Julie's workflow from RStudio
+
+Based on <https://jupyterbook.org/intro.html>
+
+First install `jupyter-book` in Bash from the Command Line (I use Terminal from within RStudio)
+```{bash}
+pip install -U jupyter-book
+```
+
+Next, clone the repository and set it as the current directory. I did this from RStudio 
+```{bash}
+git clone https://github.com/NASA-Openscapes/openscapes_jupyterbook_test/
+cd openscapes_jupyterbook_test
+```
+
+```{bash}
+jupyter-book build ./book
+```
