@@ -1,3 +1,5 @@
-# CMR and CMR-STAC API Jupyter Notebooks
+# Background
 
-Testing by writing some words here. 
+Some great text about CMR and CMR-STAC, among other things
+
+API Jupyter Notebooks

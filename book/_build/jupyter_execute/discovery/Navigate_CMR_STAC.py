@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # CMR and CMR-STAC API
+# TODO: credit where this came from
+
 # ---
 # # 1. Getting Started <a id="getstarted"></a>
 

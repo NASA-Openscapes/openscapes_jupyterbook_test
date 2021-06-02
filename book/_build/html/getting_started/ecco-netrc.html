@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download ECCO data to local disk &amp; access from Python 3 &#8212; Cloud for Earth Science</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Authentication" href="authentication.html" />
+    <link rel="prev" title="Earthdata Login" href="earthdata_login.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/openscapes_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Cloud for Earth Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="earthdata_login.html">
+   Earthdata Login
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Download ECCO data to local disk &amp; access from Python 3
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="authentication.html">
+   Authentication
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="netrc_file.html">
+     LP DAAC netrc example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inline_authentication.html">
+     PO DAAC Authentication Example
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  NASA Cloud Data Discovery
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../discovery/discovery.html">
+   CMR and CMR-STAC API Jupyter Notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../discovery/Navigate_CMR_STAC.html">
+   1. Getting Started
+   <a id="getstarted">
+   </a>
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  NASA Cloud Data Access
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../access/access.html">
+   Jupyter Notebook that demonstrates how to access data
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/getting_started/ecco-netrc.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgetting_started/ecco-netrc.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/getting_started/ecco-netrc.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quick-start">
+   Quick Start
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-your-netrc-file">
+     Configure your
+     <em>
+      .netrc
+     </em>
+     file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-a-sample-data-file-get-your-urs-cookies-and-write-them-to-a-local-file">
+     Download a sample data file, get your URS cookies, and write them to a local file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prepare-a-list-of-files-to-download">
+     Prepare a list of files to download
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-files-in-a-batch-with-gnu-wget">
+     Download files in a batch with GNU
+     <em>
+      Wget
+     </em>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-gridded-sea-surface-height-time-series">
+     Plot gridded
+     <em>
+      sea surface height
+     </em>
+     time series
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><strong>Note this is currently copied wholesale from <a class="reference external" href="https://github.com/podaac/ECCO/blob/main/Data_Access/local_bulk_download_and_open_in_py3.ipynb">https://github.com/podaac/ECCO/blob/main/Data_Access/local_bulk_download_and_open_in_py3.ipynb</a> as a starting point and will be refined</strong> <em>Duped+slightly modified version of the s3 access ipynb. Tested on JPL-issued macbook and my linux box. It starts by setting up a most trusted strategy for batch downloads behind URS ussing curl/wget. Will attempt to add line(s) to your netrc file if needed btw; then it writes your urs cookies to a local file that should effectively “pre-authenticate” future download sessions for those sub domains.</em></p>
+<div class="section" id="download-ecco-data-to-local-disk-access-from-python-3">
+<h1>Download ECCO data to local disk &amp; access from Python 3<a class="headerlink" href="#download-ecco-data-to-local-disk-access-from-python-3" title="Permalink to this headline">¶</a></h1>
+<p>This notebook is aimed at users who prefer to download the ECCO V4r4 data and analyze their content using local resources, as opposed to in the cloud.</p>
+<img src="https://podaac.jpl.nasa.gov/sites/default/files/mission_themes/featured_image/%20Estimating-the-Circulation-and-Climate-of-the-Ocean-ECCO-opt2.jpg" />
+<p>The notebook focuses on the 0.5-degree, monthly sea surface height grids from ECCO V4r4 (<a class="reference external" href="https://doi.org/10.5067/ECG5D-SSH44">10.5067/ECG5D-SSH44</a>). All data files for the collection are downloaded to local disk in their native archive file format – 312 total files in netCDF4 format. The notebook concludes by loading the whole gridded time series into Python with <em>xarray</em>.</p>
+<div class="section" id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<p><strong>A key takeaway in this notebook…</strong> <a class="reference external" href="https://wiki.earthdata.nasa.gov/display/EL/How+To+Access+Data+With+cURL+And+Wget?src=contextnavpagetreemode">follow these instructions on the Earthdata Wiki</a> to authenticate and store your URS cookies in a local file. You can batch download really efficiently this way, effectively “pre-authenticated” through your previous session.</p>
+<p>Avoid lines that begin with <code class="docutils literal notranslate"><span class="pre">%</span></code> or <code class="docutils literal notranslate"><span class="pre">%%</span></code> in code cells. Those are IPython “magic functions” that tell a line or cell to evaluate in some special mode like by bash instead of py3.</p>
+<div class="section" id="configure-your-netrc-file">
+<h3>Configure your <em>.netrc</em> file<a class="headerlink" href="#configure-your-netrc-file" title="Permalink to this headline">¶</a></h3>
+<p>Good idea to back up your existing netrc file, if you have one. And while youre at it check for these entries because they might exist in there already:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">cp</span> ~/.netrc ~/bak.netrc
+
+<span class="o">%</span><span class="k">cat</span> ~/.netrc | grep &#39;.earthdata.nasa.gov&#39; | cut -f-5 -d&quot; &quot;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>machine urs.earthdata.nasa.gov login jmcnelis password
+machine opendap.earthdata.nasa.gov login jmcnelis password
+machine urs.earthdata.nasa.gov login jmcnelis password
+machine opendap.earthdata.nasa.gov login jmcnelis password
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Add entries to your netrc for these two <em><a class="reference external" href="http://earthdata.nasa.gov">earthdata.nasa.gov</a></em> sub domains, at a minimum:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>machine <a class="reference external" href="http://urs.earthdata.nasa.gov">urs.earthdata.nasa.gov</a> login jmcnelis password ***
+machine <a class="reference external" href="http://opendap.earthdata.nasa.gov">opendap.earthdata.nasa.gov</a> login jmcnelis password ***</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>and replace `jmcnelis` and `***` with your Earthdata Login *username* and *password*, respectively...
+</pre></div>
+</div>
+</div></blockquote>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">jmcnelis</span></code> and <code class="docutils literal notranslate"><span class="pre">***</span></code> with your Earthdata <em>username</em> and <em>password</em>, and then run the cell to <em>append</em> these two lines to your netrc file, if one exists. Otherwise write them to a new one. (all set up by <code class="docutils literal notranslate"><span class="pre">-a</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> -a ~/.netrc
+<span class="n">machine</span> <span class="n">urs</span><span class="o">.</span><span class="n">earthdata</span><span class="o">.</span><span class="n">nasa</span><span class="o">.</span><span class="n">gov</span> <span class="n">login</span> <span class="n">jmcnelis</span> <span class="n">password</span> <span class="o">***</span>
+<span class="n">machine</span> <span class="n">opendap</span><span class="o">.</span><span class="n">earthdata</span><span class="o">.</span><span class="n">nasa</span><span class="o">.</span><span class="n">gov</span> <span class="n">login</span> <span class="n">jmcnelis</span> <span class="n">password</span> <span class="o">***</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Appending to /Users/lowndes/.netrc
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dump the netrc again sans passwords to confirm that it worked:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ~/.netrc <span class="p">|</span> grep <span class="s1">&#39;.earthdata.nasa.gov&#39;</span> <span class="p">|</span> cut -f-5 -d<span class="s2">&quot; &quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>machine urs.earthdata.nasa.gov login jmcnelis password
+machine opendap.earthdata.nasa.gov login jmcnelis password
+machine urs.earthdata.nasa.gov login jmcnelis password
+machine opendap.earthdata.nasa.gov login jmcnelis password
+machine urs.earthdata.nasa.gov login jmcnelis password
+machine opendap.earthdata.nasa.gov login jmcnelis password
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, you need to make sure to limit access to the netrc file because it stores your plain text password. Simple on MacOS and Linux:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>chmod <span class="m">0600</span> ~/.netrc
+</pre></div>
+</div>
+</div>
+</div>
+<p>No outputs expected.</p>
+</div>
+<div class="section" id="download-a-sample-data-file-get-your-urs-cookies-and-write-them-to-a-local-file">
+<h3>Download a sample data file, get your URS cookies, and write them to a local file<a class="headerlink" href="#download-a-sample-data-file-get-your-urs-cookies-and-write-them-to-a-local-file" title="Permalink to this headline">¶</a></h3>
+<p>Now I’ll download a random file that’s protected by URS/Earthdata Login authentication so that I can grab my URS cookies.</p>
+<p>I chose to download a file containing ECCO grid geometries for the 0.5-degree latitude/longitude grid. It’s small and it may prove useful for downstream analysis of the SSH data. (Again, any protected data file will work.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+wget --no-verbose \
+     --no-clobber \
+     --load-cookies ~/.urs_cookies \
+     --save-cookies ~/.urs_cookies \
+     --keep-session-cookies \
+     https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-protected/ECCO_L4_GEOMETRY_05DEG_V4R4/GRID_GEOMETRY_ECCO_V4r4_latlon_0p50deg.nc
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bash: line 1: wget: command not found
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">CalledProcessError</span><span class="g g-Whitespace">                        </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="n">b21bbb0d47f6</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_cell_magic</span><span class="p">(</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;wget --no-verbose </span><span class="se">\\\n</span><span class="s1">     --no-clobber </span><span class="se">\\\n</span><span class="s1">     --load-cookies ~/.urs_cookies </span><span class="se">\\\n</span><span class="s1">     --save-cookies ~/.urs_cookies </span><span class="se">\\\n</span><span class="s1">     --keep-session-cookies </span><span class="se">\\\n</span><span class="s1">     https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-protected/ECCO_L4_GEOMETRY_05DEG_V4R4/GRID_GEOMETRY_ECCO_V4r4_latlon_0p50deg.nc</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2397</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2398</span>                 <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2399</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2400</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">   </span><span class="mi">2401</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/IPython/core/magics/script.py</span> in <span class="ni">named_script_magic</span><span class="nt">(line, cell)</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span>             <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span>                 <span class="n">line</span> <span class="o">=</span> <span class="n">script</span>
+<span class="ne">--&gt; </span><span class="mi">142</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shebang</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span> 
+<span class="g g-Whitespace">    </span><span class="mi">144</span>         <span class="c1"># write a basic docstring:</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/decorator.py</span> in <span class="ni">fun</span><span class="nt">(*args, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span>                 <span class="n">args</span><span class="p">,</span> <span class="n">kw</span> <span class="o">=</span> <span class="n">fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">231</span>             <span class="k">return</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>     <span class="k">def</span> <span class="nf">magic_deco</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">187</span>         <span class="n">call</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> 
+<span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/IPython/core/magics/script.py</span> in <span class="ni">shebang</span><span class="nt">(self, line, cell)</span>
+<span class="g g-Whitespace">    </span><span class="mi">243</span>             <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">244</span>         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">raise_error</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">returncode</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">245</span>             <span class="k">raise</span> <span class="n">CalledProcessError</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">returncode</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">err</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span> 
+<span class="g g-Whitespace">    </span><span class="mi">247</span>     <span class="k">def</span> <span class="nf">_run_script</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">to_close</span><span class="p">):</span>
+
+<span class="ne">CalledProcessError</span>: Command &#39;b&#39;wget --no-verbose \\\n     --no-clobber \\\n     --load-cookies ~/.urs_cookies \\\n     --save-cookies ~/.urs_cookies \\\n     --keep-session-cookies \\\n     https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-protected/ECCO_L4_GEOMETRY_05DEG_V4R4/GRID_GEOMETRY_ECCO_V4r4_latlon_0p50deg.nc\n&#39;&#39; returned non-zero exit status 127.
+</pre></div>
+</div>
+</div>
+</div>
+<p>I used <em>–quiet</em> mode so wget would not dump tons of garbage into the notebook. Confirm that the cookies file exists in your home directory:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls ~/.urs_cookies
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jmcnelis/.urs_cookies
+</pre></div>
+</div>
+</div>
+</div>
+<p>And see if the file downloaded successfully to double-confirm it worked as expected (and be aware that the <em>ncdump</em> output is truncated to the first 50 lines):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ncdump -h GRID_GEOMETRY_ECCO_V4r4_latlon_0p50deg.nc <span class="p">|</span> head -25
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>netcdf GRID_GEOMETRY_ECCO_V4r4_latlon_0p50deg {
+dimensions:
+	Z = 50 ;
+	latitude = 360 ;
+	longitude = 720 ;
+	nv = 2 ;
+variables:
+	float Z(Z) ;
+		Z:axis = &quot;Z&quot; ;
+		Z:bounds = &quot;Z_bnds&quot; ;
+		Z:comment = &quot;Non-uniform vertical spacing.&quot; ;
+		Z:coverage_content_type = &quot;coordinate&quot; ;
+		Z:long_name = &quot;depth of grid cell center&quot; ;
+		Z:positive = &quot;up&quot; ;
+		Z:standard_name = &quot;depth&quot; ;
+		Z:units = &quot;m&quot; ;
+	float latitude(latitude) ;
+		latitude:axis = &quot;Y&quot; ;
+		latitude:bounds = &quot;latitude_bnds&quot; ;
+		latitude:comment = &quot;uniform grid spacing from -89.75 to 89.75 by 0.5&quot; ;
+		latitude:coverage_content_type = &quot;coordinate&quot; ;
+		latitude:long_name = &quot;latitude at grid cell center&quot; ;
+		latitude:standard_name = &quot;latitude&quot; ;
+		latitude:units = &quot;degrees_north&quot; ;
+	float longitude(longitude) ;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>And that’s it!</strong> You should now be able to use <em>wget</em> and <em>curl</em> to download URS-protected data from PODAAC cloud without providing your creds each time.</p>
+</div>
+<div class="section" id="prepare-a-list-of-files-to-download">
+<h3>Prepare a list of files to download<a class="headerlink" href="#prepare-a-list-of-files-to-download" title="Permalink to this headline">¶</a></h3>
+<p>Now the only step that remains is to get a list of URLs to pass to <em>wget</em> or <em>curl</em> for downloading. There’s a lot of ways to do this – even more so for ECCO V4r4 data because the files/datasets follow well-structured naming conventions – but we will rely on Earthdata Search to do this from the browser for the sake of simplicity.</p>
+<p><strong>1. Find the collection/dataset of interest in Earthdata Search.</strong></p>
+<p>Start from this <a class="reference external" href="https://search.earthdata.nasa.gov/portal/podaac-cloud/search?fpj=ECCO">complete list of ECCO collections</a> in Earthdata Search (79 in total), and refine the results until you see your dataset of interest.
+In this case we want <a class="reference external" href="https://search.earthdata.nasa.gov/portal/podaac-cloud/search/granules?p=C1990404799-POCLOUD">monthly sea surface height grids</a> provided at 0.5-degree cell resolution on an interpolated latitude/longitude grid.</p>
+<p><strong>2. Pick your collection, then click the green <em>Download All</em> button on the next page.</strong></p>
+<p>Click the big green button identified by the red arrow/box in the screenshot below.</p>
+<img src="resources/edsc1.png" width="70%" />
+<p>That will add all the granules in the collection to your “shopping cart” and then redirect you straight there and present you with the available options for customizing the data prior to download. We will ignore those because they’re mostly in active development and because we want to download all data in the collection.</p>
+<img src="resources/edsc2.png" width="70%" />
+<center><i>The screenshot above shows the download customization interface (i.e. "shopping cart")</i></center>
+<p><strong>3. Click <em>Download Data</em> to get your list of download urls (bottom-left, another green button)</strong></p>
+<p>The <em>Download Data</em> button takes you to one final page that provides the list of urls from which to download the files matching your search parameters and any customization options that you selected in the steps that followed. This page will be retained in your User History in case you need to return to it later.</p>
+<img src="resources/edsc3.png" width="70%" />
+<p>There are several ways that you could get the list of urls into a text file that’s accessible from Jupyter or your local shell. I simply clicked the save button in my browser and downloaded them as a text file to a subdirectory called <em>resources</em> inside this workspace. (You could also copy them into a new notebook cell and write them to a file like we did with the netrc file above.)</p>
+</div>
+<div class="section" id="download-files-in-a-batch-with-gnu-wget">
+<h3>Download files in a batch with GNU <em>Wget</em><a class="headerlink" href="#download-files-in-a-batch-with-gnu-wget" title="Permalink to this headline">¶</a></h3>
+<p>I find <em>wget</em> options to be convenient and easy to remember. There are only a handful that I use with any regularity.</p>
+<p>The most important wget option for our purpose is set by the <code class="docutils literal notranslate"><span class="pre">-i</span></code> argument, which takes a path to the input text file containing our download urls. Another nice feature of wget is the ability to continue downloads where you left of during a previously-interuppted download session. That option is turned on by passing the <code class="docutils literal notranslate"><span class="pre">-c</span></code> argument.</p>
+<p>Now run wget against a list of files retrieve from Earthdata Search and see what happens.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls resources/*.txt
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>resources/5237392644-download.txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>Go ahead and create a <em>data/</em> directory to keep the downloaded files, and then start the downloads into that location by including the <code class="docutils literal notranslate"><span class="pre">-P</span></code> argument:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+
+mkdir -p data
+
+wget --no-verbose \
+     --no-clobber \
+     --continue \
+     -i resources/5237392644-download.txt -P data/
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wait a long time if you have to… then count the number of netCDF files in the <em>data</em> directory:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls -1 data/*.nc <span class="p">|</span> wc -l
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     312
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add a folder for outputs, if needed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir -p outputs/
+</pre></div>
+</div>
+</div>
+</div>
+<p>Get a list of netCDF files at the <em>data</em> directory and print the count + the first filename in the list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="o">!</span>ls data/*.nc
+
+<span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">),</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(312, &#39;data/SEA_SURFACE_HEIGHT_mon_mean_1992-01_ECCO_V4r4_latlon_0p50deg.nc&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the first time you’ll need any Python in this notebook… Install Python 3 requirements (I am on version 3.8.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!conda install -c conda-forge numpy dask netCDF4 xarray, cartopy, ffmpeg</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeat</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Open the netCDFs as one multi-file dataset with <em>xarray</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span>
+    <span class="n">paths</span><span class="o">=</span><span class="n">files</span><span class="p">,</span>
+    <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;by_coords&#39;</span><span class="p">,</span>
+    <span class="n">mask_and_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">decode_cf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="mi">360</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">:</span> <span class="mi">720</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">ssh</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">SSH</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ssh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;SSH&#39; (time: 312, latitude: 360, longitude: 720)&gt;
+dask.array&lt;concatenate, shape=(312, 360, 720), dtype=float32, chunksize=(1, 360, 720), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * time       (time) datetime64[ns] 1992-01-16T18:00:00 ... 2017-12-16T06:00:00
+  * latitude   (latitude) float32 -89.75 -89.25 -88.75 ... 88.75 89.25 89.75
+  * longitude  (longitude) float32 -179.8 -179.2 -178.8 ... 178.8 179.2 179.8
+Attributes:
+    coverage_content_type:  modelResult
+    long_name:              Dynamic sea surface height anomaly
+    standard_name:          sea_surface_height_above_geoid
+    units:                  m
+    comment:                Dynamic sea surface height anomaly above the geoi...
+    valid_min:              -1.8805772066116333
+    valid_max:              1.4207719564437866
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-gridded-sea-surface-height-time-series">
+<h3>Plot gridded <em>sea surface height</em> time series<a class="headerlink" href="#plot-gridded-sea-surface-height-time-series" title="Permalink to this headline">¶</a></h3>
+<p>But only the timesteps beginning in 2015:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ssh_after_201x</span> <span class="o">=</span> <span class="n">ssh</span><span class="p">[</span><span class="n">ssh</span><span class="p">[</span><span class="s1">&#39;time.year&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">2015</span><span class="p">,:,:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ssh_after_201x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;SSH&#39; (time: 36, latitude: 360, longitude: 720)&gt;
+dask.array&lt;getitem, shape=(36, 360, 720), dtype=float32, chunksize=(1, 360, 720), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * time       (time) datetime64[ns] 2015-01-16T12:00:00 ... 2017-12-16T06:00:00
+  * latitude   (latitude) float32 -89.75 -89.25 -88.75 ... 88.75 89.25 89.75
+  * longitude  (longitude) float32 -179.8 -179.2 -178.8 ... 178.8 179.2 179.8
+Attributes:
+    coverage_content_type:  modelResult
+    long_name:              Dynamic sea surface height anomaly
+    standard_name:          sea_surface_height_above_geoid
+    units:                  m
+    comment:                Dynamic sea surface height anomaly above the geoi...
+    valid_min:              -1.8805772066116333
+    valid_max:              1.4207719564437866
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the grid for the first time step using a Robinson projection. Define a helper function for consistency throughout the notebook:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_figure</span><span class="p">(</span><span class="n">proj</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeat</span><span class="o">.</span><span class="n">LAND</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeat</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeat</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeat</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">make_figure</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">())</span>
+
+<span class="n">ssh_after_201x</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cartopy.mpl.geocollection.GeoQuadMesh at 0x1a344a0a0&gt;
+</pre></div>
+</div>
+<img alt="../_images/ecco-netrc_32_1.png" src="../_images/ecco-netrc_32_1.png" />
+</div>
+</div>
+<p>Now plot the whole time series (post-2010) in an animation and write it to an mp4 file called <em>ecco_monthly_ssh_grid_2015_to_x.mp4</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_animation</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">cmap</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;Spectral_r&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get time series animation for input xarray dataset&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">draw_map</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">add_colorbar</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> 
+                      <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+                      <span class="n">add_colorbar</span><span class="o">=</span><span class="n">add_colorbar</span><span class="p">,</span>
+                      <span class="n">vmin</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">valid_min</span><span class="p">,</span> 
+                      <span class="n">vmax</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">valid_max</span><span class="p">,</span>
+                      <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span><span class="p">)[:</span><span class="mi">7</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">m</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">draw_map</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">draw_map</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">init</span><span class="p">,</span> <span class="n">animate</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now make the animation using the function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">make_figure</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">())</span>
+
+<span class="n">init</span><span class="p">,</span> <span class="n">animate</span> <span class="o">=</span> <span class="n">get_animation</span><span class="p">(</span><span class="n">ssh_after_201x</span><span class="p">)</span>
+
+<span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> 
+                              <span class="n">func</span><span class="o">=</span><span class="n">animate</span><span class="p">,</span> 
+                              <span class="n">frames</span><span class="o">=</span><span class="n">ssh_after_201x</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> 
+                              <span class="n">init_func</span><span class="o">=</span><span class="n">init</span><span class="p">,</span> 
+                              <span class="n">interval</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
+                              <span class="n">blit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                              <span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Now save the animation to an MP4 file:</span>
+<span class="n">ani</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;outputs/ecco_monthly_ssh_grid_2015_to_x.mp4&#39;</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="n">animation</span><span class="o">.</span><span class="n">FFMpegWriter</span><span class="p">(</span><span class="n">fps</span><span class="o">=</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Render the animation in the ipynb:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#HTML(ani.to_html5_video())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./getting_started"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="earthdata_login.html" title="previous page">Earthdata Login</a>
+    <a class='right-next' id="next-link" href="authentication.html" title="next page">Authentication</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By NASA Openscapes Community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

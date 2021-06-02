@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Authentication &#8212; Cloud for Earth Science</title>
+    <title>Authentication notebooks &#8212; Cloud for Earth Science</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="LP DAAC netrc example" href="netrc_file.html" />
-    <link rel="prev" title="A .ipynb stub for data passwords" href="earthdata_login_test.html" />
+    <link rel="next" title="LP DAAC Authentication Example" href="lpdaac-netrc.html" />
+    <link rel="prev" title="Setup &amp; Background" href="setup.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -96,20 +96,13 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="earthdata_login.html">
-   Earthdata Login
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="earthdata_login_test.html">
-   A .ipynb stub for data passwords
-   <a id="getstarted">
-   </a>
+  <a class="reference internal" href="setup.html">
+   Setup &amp; Background
   </a>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
-   Authentication
+   Authentication notebooks
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -118,12 +111,12 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="netrc_file.html">
-     LP DAAC netrc example
+    <a class="reference internal" href="lpdaac-netrc.html">
+     LP DAAC Authentication Example
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="inline_authentication.html">
+    <a class="reference internal" href="podaac-ecco-netrc.html">
      PO DAAC Authentication Example
     </a>
    </li>
@@ -136,17 +129,22 @@
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../discovery/discovery.html">
-   CMR and CMR-STAC API Jupyter Notebooks
+   Background
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../discovery/Navigate_CMR_STAC.html">
-   1. Getting Started
-   <a id="getstarted">
-   </a>
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discovery/Navigate_CMR_STAC.html">
+     CMR and CMR-STAC API
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p class="caption">
@@ -155,9 +153,33 @@
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../access/access.html">
-   Jupyter Notebook that demonstrates how to access data
+   Background
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../access/access-notebook.html">
+     Jupyter Notebook that demonstrates how to access data
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Further resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../glossary.html">
+   Glossary
   </a>
  </li>
 </ul>
@@ -250,15 +272,20 @@
         
               <div>
                 
-  <div class="section" id="authentication">
-<h1>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="authentication-notebooks">
+<h1>Authentication notebooks<a class="headerlink" href="#authentication-notebooks" title="Permalink to this headline">¶</a></h1>
+<!--- TODO: develop as prose to set up for the .ipynb examples --->
 <p>To access NASA data you have to authenticate.</p>
-<p>Some talk about the redirects…</p>
-<p>Solutions that work</p>
+<p>Solutions that work - these are detailed in separate chapters as Jupyter notebooks (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>).</p>
+<ol class="simple">
+<li><p>To access NASA data one must setup an Earthdata Login profile. This involves (prose here)</p></li>
+</ol>
+<p>See/link to [Christine’s post &amp; conversation on the Jupyter discourse forum](<a class="reference external" href="https://discourse.jupyter.org/t/how-do-i-properly-protect-my-data-access-passwords-not-jupyter-tokens-passwords-on-3rd-party-jupyter-hub-services/9277">https://discourse.jupyter.org/t/how-do-i-properly-protect-my-data-access-passwords-not-jupyter-tokens-passwords-on-3rd-party-jupyter-hub-services/9277</a>]</p>
 <ul class="simple">
 <li><p>Create a netrc file</p></li>
 <li><p>Submit EDL credentials within a script</p></li>
 </ul>
+<p>Some talk about the redirects…</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -288,8 +315,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="earthdata_login_test.html" title="previous page">A .ipynb stub for data passwords <a id="getstarted"></a></a>
-    <a class='right-next' id="next-link" href="netrc_file.html" title="next page">LP DAAC netrc example</a>
+    <a class='left-prev' id="prev-link" href="setup.html" title="previous page">Setup &amp; Background</a>
+    <a class='right-next' id="next-link" href="lpdaac-netrc.html" title="next page">LP DAAC Authentication Example</a>
 
         </div>
         
