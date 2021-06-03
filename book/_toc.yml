@@ -1,4 +1,4 @@
-- file: intro
+- file: index
 - part: Getting Started
   chapters:
   - file: getting_started/setup
