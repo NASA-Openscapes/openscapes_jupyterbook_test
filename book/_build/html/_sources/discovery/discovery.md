@@ -1,5 +1,5 @@
-# Background
+# Data discovery notebooks
 
-Some great text about CMR and CMR-STAC, among other things
+Here are the specific Jupyter notebooks available and what they do:
 
-API Jupyter Notebooks
+...

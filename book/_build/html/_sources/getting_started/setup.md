@@ -11,3 +11,7 @@ There are several things you need to set up to get started.
 ## Cloud Optimized Data Formats
 
 Some great info here about Cloud Optimized Data Formats. 
+
+## Authenticate.
+
+You'll have to authenticate. That's next. 
