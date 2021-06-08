@@ -1,8 +1,10 @@
-# Setup & Background
+# GETTING STARTED
+
+## Background
 
 There are several things you need to set up to get started.
 
-## Prerequisites
+## Set-up Prerequisites
 
 To be able to best work with NASA data in the ways described in this book, you'll need some familiarity with python and the command line. We recommend the following: 
 

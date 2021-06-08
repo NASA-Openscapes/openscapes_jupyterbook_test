@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Background &#8212; Cloud for Earth Science</title>
+    <title>GETTING STARTED &#8212; Cloud for Earth Science</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data access notebooks" href="access.html" />
-    <link rel="prev" title="CMR and CMR-STAC API" href="../discovery/Navigate_CMR_STAC.html" />
+    <link rel="next" title="Authentication notebooks" href="authentication.html" />
+    <link rel="prev" title="Welcome" href="../index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -90,13 +90,13 @@
  </li>
 </ul>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../getting_started/getting_started.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    GETTING STARTED
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../getting_started/authentication.html">
+  <a class="reference internal" href="authentication.html">
    Authentication notebooks
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -106,12 +106,12 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../getting_started/lpdaac-netrc.html">
+    <a class="reference internal" href="lpdaac-netrc.html">
      LP DAAC Authentication Example
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../getting_started/podaac-ecco-netrc.html">
+    <a class="reference internal" href="podaac-ecco-netrc.html">
      PO DAAC Authentication Example
     </a>
    </li>
@@ -139,13 +139,13 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Background
+ <li class="toctree-l1">
+  <a class="reference internal" href="../access/access.html">
+   ACCESS
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="access.html">
+  <a class="reference internal" href="../access/access-notebooks.html">
    Data access notebooks
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
@@ -155,11 +155,21 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="access-notebook.html">
+    <a class="reference internal" href="../access/access-something-specific.html">
      Jupyter Notebook that demonstrates how to access data
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../processing/processing.html">
+   PROCESSING
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visualization/visualization.html">
+   VISUALIZATION
+  </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../glossary.html">
@@ -207,7 +217,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/access/background.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/getting_started/getting_started.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -227,7 +237,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Faccess/background.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgetting_started/getting_started.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -248,6 +258,34 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up-prerequisites">
+   Set-up Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloud-optimized-data-formats">
+   Cloud Optimized Data Formats
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#authenticate">
+   Authenticate.
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -256,9 +294,28 @@
         
               <div>
                 
-  <div class="section" id="background">
-<h1>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h1>
-<p>Some background here about access.</p>
+  <div class="section" id="getting-started">
+<h1>GETTING STARTED<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>There are several things you need to set up to get started.</p>
+</div>
+<div class="section" id="set-up-prerequisites">
+<h2>Set-up Prerequisites<a class="headerlink" href="#set-up-prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>To be able to best work with NASA data in the ways described in this book, you’ll need some familiarity with python and the command line. We recommend the following:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://earth-env-data-science.github.io/intro.html"><strong>An Introduction to Earth and Environmental Data Science</strong></a> by Ryan Abernathy and Kerry Key.</p></li>
+<li><p>…</p></li>
+</ul>
+</div>
+<div class="section" id="cloud-optimized-data-formats">
+<h2>Cloud Optimized Data Formats<a class="headerlink" href="#cloud-optimized-data-formats" title="Permalink to this headline">¶</a></h2>
+<p>Some great info here about Cloud Optimized Data Formats.</p>
+</div>
+<div class="section" id="authenticate">
+<h2>Authenticate.<a class="headerlink" href="#authenticate" title="Permalink to this headline">¶</a></h2>
+<p>You’ll have to authenticate. That’s next.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -274,7 +331,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./access"
+            path: "./getting_started"
         },
         predefinedOutput: true
     }
@@ -286,8 +343,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../discovery/Navigate_CMR_STAC.html" title="previous page">CMR and CMR-STAC API</a>
-    <a class='right-next' id="next-link" href="access.html" title="next page">Data access notebooks</a>
+    <a class='left-prev' id="prev-link" href="../index.html" title="previous page">Welcome</a>
+    <a class='right-next' id="next-link" href="authentication.html" title="next page">Authentication notebooks</a>
 
         </div>
         

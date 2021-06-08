@@ -1,26 +1,22 @@
 - file: index
-- part: Getting Started
-  chapters:
-  - file: getting_started/setup
-  - file: getting_started/authentication
-    expand_section: true
-    sections:
-    - file: getting_started/lpdaac-netrc #.ipynb
-    - file: getting_started/podaac-ecco-netrc #.ipynb
-- part: NASA Cloud Data Discovery
-  chapters:
-  - file: discovery/background
-  - file: discovery/discovery
-    expand_section: true
-    sections:
-    - file: discovery/Navigate_CMR_STAC #.ipynb
-- part: NASA Cloud Data Access
-  chapters:
-  - file: access/background
-  - file: access/access
-    expand_section: true
-    sections:
-    - file: access/access-notebook #.ipynb
-- part: Further resources
-  chapters:
-  - file: glossary
+- file: getting_started/getting_started
+- file: getting_started/authentication
+  expand_section: true
+  sections:
+  - file: getting_started/lpdaac-netrc #.ipynb
+  - file: getting_started/podaac-ecco-netrc #.ipynb
+#- part: NASA Cloud Data Discovery
+#  chapters:
+- file: discovery/discovery
+- file: discovery/discover-notebooks
+  expand_section: true
+  sections:
+  - file: discovery/Navigate_CMR_STAC #.ipynb
+- file: access/access
+- file: access/access-notebooks
+  expand_section: true
+  sections:
+  - file: access/access-something-specific #.ipynb
+- file: processing/processing
+- file: visualization/visualization
+- file: glossary

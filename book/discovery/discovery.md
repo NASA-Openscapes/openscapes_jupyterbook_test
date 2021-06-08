@@ -1,5 +1,7 @@
-# Data discovery notebooks
+# NASA CLOUD DATA DISCOVERY
 
-Here are the specific Jupyter notebooks available and what they do:
+Some background here about discovery. 
 
-...
+Some great text about CMR and CMR-STAC, among other things
+
+
